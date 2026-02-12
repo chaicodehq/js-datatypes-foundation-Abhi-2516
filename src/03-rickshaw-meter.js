@@ -10,11 +10,7 @@
  *
  * Functions:
  *
- *   1. parseFare(fareString)
- *      - Customer bolte hain "152.50" as string — parseFloat() se number banao
- *      - Agar result NaN hai ya fareString string nahi hai, return -1
- *      - Example: parseFare("152.50") => 152.5
- *      - Example: parseFare("abc") => -1
+ *   
  *
  *   2. roundFare(amount, decimalPlaces)
  *      - .toFixed(decimalPlaces) se fare round karo
@@ -51,21 +47,49 @@
  *   findCheapestAndCostliest(150, 80, 200) // => { cheapest: 80, costliest: 200 }
  */
 export function parseFare(fareString) {
-  // Your code here
+  if (typeof fareString !== "string") return -1;
+
+  let fare = parseFloat(fareString);
+
+  if (isNaN(fare)) return -1;
+
+  return fare;
 }
 
 export function roundFare(amount, decimalPlaces) {
-  // Your code here
+  if (typeof amount !== "number") return "";
+  if (!Number.isInteger(decimalPlaces) || decimalPlaces < 0) return "";
+
+  return amount.toFixed(decimalPlaces);
 }
 
 export function calculateSurge(baseFare, surgeMultiplier) {
-  // Your code here
+  if (typeof baseFare !== "number" || baseFare <= 0) return 0;
+  if (typeof surgeMultiplier !== "number" || surgeMultiplier <= 0) return 0;
+
+  let total = baseFare * surgeMultiplier;
+
+  return Math.ceil(total);
 }
 
 export function findCheapestAndCostliest(...fares) {
-  // Your code here
+  // keep only valid numbers
+  let validFares = fares.filter(fare => typeof fare === "number" && !isNaN(fare));
+
+  if (validFares.length === 0) return null;
+
+  let cheapest = Math.min(...validFares);
+  let costliest = Math.max(...validFares);
+
+  return { cheapest, costliest };
 }
 
 export function getDistanceDifference(from, to) {
-  // Your code here
+  let num1 = parseInt(from);
+  let num2 = parseInt(to);
+
+  if (isNaN(num1) || isNaN(num2)) return -1;
+
+  return Math.abs(num1 - num2);
 }
+
