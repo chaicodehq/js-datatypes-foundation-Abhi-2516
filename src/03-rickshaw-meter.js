@@ -73,7 +73,7 @@ export function calculateSurge(baseFare, surgeMultiplier) {
 }
 
 export function findCheapestAndCostliest(...fares) {
-  // keep only valid numbers
+
   let validFares = fares.filter(fare => typeof fare === "number" && !isNaN(fare));
 
   if (validFares.length === 0) return null;
